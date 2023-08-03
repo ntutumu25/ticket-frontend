@@ -1,0 +1,37 @@
+.barra-menu{
+    position: fixed;
+    width:100%;
+    z-index: 2;
+    box-shadow:  2px 2px 3px rgb(148, 140, 130);;
+}
+.navbar-brand{
+    color: rgb(34, 35, 36);
+    font-weight: bolder;
+}
+.menu-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info-nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+
+.letra{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.hidden{
+    display: none;
+}

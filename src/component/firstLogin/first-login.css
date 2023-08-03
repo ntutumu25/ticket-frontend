@@ -1,0 +1,52 @@
+.contenedor-principal{
+    padding-top: 60px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(218, 216, 214);
+}
+
+.titulo-info-container{
+    background-color: rgb(196, 188, 188);
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 10px rgb(148, 140, 130);
+}
+
+.info-actualizar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.input-password{   
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(233, 231, 231);
+}
+.input-password:focus {
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(76, 145, 235, 0.6); 
+    outline: 0 none;
+}
+
+.boton-reset{
+    border: none;
+    padding: 6px;
+    background-color: rgb(161, 158, 158);
+    border-radius: 5px;
+}
+
+.boton-reset:hover{
+    background-color:  rgb(170, 168, 168);
+}
+
+.alerta-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
