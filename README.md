@@ -1,2 +1,2 @@
 # ticket-frontend
-frontend para mi app MBIA ticketSystem
+frontend para MBIA ticketSystem
