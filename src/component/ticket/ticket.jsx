@@ -145,6 +145,7 @@ function TicketSpace({ isScrolling }) {
               <button className="boton-buscar"><BsSearch /></button>
             </div>
           </form>
+         
         </div>
 
       </div>
@@ -183,7 +184,7 @@ function TicketSpace({ isScrolling }) {
                   </div>
                   <div className="m-2">
                     <label htmlFor="prioridad">Criticité</label>
-                    <select value={newTicket.prioridad} onChange={handleInputChange} name="prioridad" id="prioridad" className="input-option">
+                   <select value={newTicket.prioridad} onChange={handleInputChange} name="prioridad" id="prioridad" className="input-option">
                       <option value="none" disabled selected>Criticité</option>
                       <option value="H">HAUT</option>
                       <option value="M">MOYENNE</option>

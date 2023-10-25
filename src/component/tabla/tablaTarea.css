@@ -1,0 +1,23 @@
+
+.accion-tabla-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	
+    
+
+}
+
+.accion-tabla-container >span{
+    font-size:25px;
+    cursor: pointer;
+    
+}
+
+.editar{
+    color: rgb(48, 173, 211);
+    margin-right: 7px;
+}
+.comentar{
+    color: gray;
+}
