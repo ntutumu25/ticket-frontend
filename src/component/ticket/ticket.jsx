@@ -101,7 +101,7 @@ function TicketSpace({ isScrolling }) {
 
   return (
     <div className="ticket-main-container">
-      <div className={isScrolling > 5 ? 'static-header-menu' : ''}>
+      <div className=''>
         <div className="menus-ticket-container">
           <div className="header-menu">
 
@@ -134,7 +134,7 @@ function TicketSpace({ isScrolling }) {
 
           </div>
           <div className="btn-tarea-container">
-            <button className="btn-tarea" data-bs-toggle="modal" data-bs-target="#modalTareaAdd"><span><BsFileEarmarkDiffFill /></span> Nouvelle tâches</button>
+            <button className="btn-tarea" data-bs-toggle="modal" data-bs-target="#modalTareaAdd"><span><BsFileEarmarkDiffFill /></span> Nouveau  ticket</button>
           </div>
 
         </div>
@@ -150,10 +150,9 @@ function TicketSpace({ isScrolling }) {
 
       </div>
 
-      <div className={isScrolling > 5 ? 'tabla-container' : ''}>
+      <div className=''>
         <TablaTareas tipoTarea={header} getTicket={tickets} />
       </div>
-
 
 
       {/* modal para agregar una nueva tarea  */}
@@ -186,9 +185,9 @@ function TicketSpace({ isScrolling }) {
                     <label htmlFor="prioridad">Criticité</label>
                    <select value={newTicket.prioridad} onChange={handleInputChange} name="prioridad" id="prioridad" className="input-option">
                       <option value="none" disabled selected>Criticité</option>
-                      <option value="H">HAUT</option>
-                      <option value="M">MOYENNE</option>
-                      <option value="B">BASS</option>
+                      <option value="HAUT">HAUT</option>
+                      <option value="MOYENE">MOYENE</option>
+                      <option value="BASS">BASS</option>
                     </select>
                   </div>
                   <div className="m-2" >
