@@ -17,7 +17,7 @@ function WorkSpace() {
     const navigate = useNavigate()
 
     const { userState, usuario, dispatch } = useAppContext()
-   
+
     const [selectMenu, setSelectMenu] = useState(0) //valiable para resaltar el menu seleccionado
 
     const [scrollHeight, setScrollHeight] = useState(0); //variable del position
@@ -48,47 +48,49 @@ function WorkSpace() {
             value: { "login": false }
         })
     }
-    return (
-        <div className="workSpace-container">
 
+    const renderContent = () => {
+        // funcion de renderizado los menu del navbar
+        switch (selectMenu) {
+            case 0:
+                return <Dashboard/>
+            case 1:
+                return <TicketSpace isScrolling={scrollHeight} />;
+            case 2:
+                return <div>NONE DISPONIBLE</div>;
+            default:
+                return null;
+        }
+    };
+
+    return (
+
+        <div className="workSpace-container">
             <div className="barra-lateral-container">
                 <div className="menu-lateral">
-
-                    <div onClick={() => setSelectMenu(0)}
-                        className={selectMenu == 0 ? 'items-select' : 'items-menu'}>
+                    <div onClick={() => setSelectMenu(0)} className={selectMenu === 0 ? 'items-select' : 'items-menu'}>
                         <span className='icon'><AiFillLayout /></span>
                         Accueil
                     </div>
-
-                    <div onClick={() => setSelectMenu(1)}
-                        className={selectMenu == 1 ? 'items-select' : 'items-menu'}>
+                    <div onClick={() => setSelectMenu(1)} className={selectMenu === 1 ? 'items-select' : 'items-menu'}>
                         <span className='icon'><AiFillReconciliation /></span>
                         Tickets
                     </div>
-
-                    <div onClick={() => setSelectMenu(2)}
-                        className={selectMenu == 2 ? 'items-select' : 'items-menu'}>
+                    <div onClick={() => setSelectMenu(2)} className={selectMenu === 2 ? 'items-select' : 'items-menu'}>
                         <span className='icon'><AiFillSetting /></span>
-                        Advancé
+                        Avancé
                     </div>
                 </div>
-
                 <div onClick={logout} className="">
                     <hr />
                     <div className="salir">
                         <span className='icon'><ImExit /></span>
-                        Quiter
+                        Quitter
                     </div>
-
                 </div>
-
             </div>
-
             <div className="personal-items-container">
-                {selectMenu == 0 ? 'none disponible' : ''}
-                {selectMenu == 1 ? <TicketSpace isScrolling={scrollHeight}/> : ''}
-                {selectMenu == 2 ? 'none disponible' : ''}
-	    
+                {renderContent()}
             </div>
         </div>
     )

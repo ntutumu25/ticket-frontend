@@ -21,9 +21,9 @@ function TicketSpace({ isScrolling }) {
 
   const { userState, dispatch, usuario } = useAppContext()
   const [header, setHeader] = useState(0) //variable para manejar el menu de selecion
-  const [tickets, setTickets]= useState([]) //variable para almacenar tickets del backend
+  const [tickets, setTickets] = useState([]) //variable para almacenar tickets del backend
   const [spin, setSpin] = useState(false)
- 
+
 
 
   const handleBuscar = (event) => {
@@ -52,8 +52,8 @@ function TicketSpace({ isScrolling }) {
     const tick = await res.json()
     setTickets(tick.ticket)
   }
-  
- 
+
+
 
   const handleNuevaTarea = (event) => {
     // funcion para registrar un nuevo ticket en el backend
@@ -94,140 +94,145 @@ function TicketSpace({ isScrolling }) {
   useEffect(() => {
 
     getTicket()
-    
+
 
   }, [header])
 
 
   return (
-    <div className="ticket-main-container">
-      <div className=''>
-        <div className="menus-ticket-container">
-          <div className="header-menu">
+   
+    
+     <div className="ticket-main-container">
+       <div className=''>
+         <div className="menus-ticket-container">
+           <div className="header-menu">
 
-            <div className={header == 0 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
-              setHeader(0)
+             <div className={header == 0 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
+               setHeader(0)
 
-            }}>
-              <span className='icono-tarea'><FaTasks /></span> Tous
-            </div>
-            <div className={header == 1 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
-              setHeader(1)
-            }}>
-              <span className='icono-tarea'><BiTaskX /></span> Ouvertes</div>
+             }}>
+               <span className='icono-tarea'><FaTasks /></span> Tous
+             </div>
+             <div className={header == 1 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
+               setHeader(1)
+             }}>
+               <span className='icono-tarea'><BiTaskX /></span> Ouvertes</div>
 
-            <div className={header == 2 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
-              setHeader(2)
-
-
-            }}>
-              <span className='icono-tarea'><BiTask /></span>Fermés
-            </div>
-
-            <div className={header == 3 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
-              setHeader(3)
+             <div className={header == 2 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
+               setHeader(2)
 
 
-            }}>
-              <span className='icono-tarea'><BsFillPersonLinesFill /></span>Mes Tickets
-            </div>
+             }}>
+               <span className='icono-tarea'><BiTask /></span>Fermés
+             </div>
 
-          </div>
-          <div className="btn-tarea-container">
-            <button className="btn-tarea" data-bs-toggle="modal" data-bs-target="#modalTareaAdd"><span><BsFileEarmarkDiffFill /></span> Nouveau  ticket</button>
-          </div>
-
-        </div>
-        <div className="form-buscar-container">
-          <form onSubmit={handleBuscar}>
-            <div className="input-container">
-              <input className="input-buscar" type="text" placeholder="Titre" />
-              <button className="boton-buscar"><BsSearch /></button>
-            </div>
-          </form>
-         
-        </div>
-
-      </div>
-
-      <div className=''>
-        <TablaTareas tipoTarea={header} getTicket={tickets} />
-      </div>
+             <div className={header == 3 ? 'header-items selectHeader' : 'header-items'} onClick={() => {
+               setHeader(3)
 
 
-      {/* modal para agregar una nueva tarea  */}
-      <div className="modal fade" id="modalTareaAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog ">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Nouveu ticket</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <div className="body-container">
+             }}>
+               <span className='icono-tarea'><BsFillPersonLinesFill /></span>Mes Tickets
+             </div>
 
-                <form onSubmit={handleNuevaTarea}>
-                  <div className="m-2">
-                    <label htmlFor="titulo">Titre</label>
-                    <input required onChange={handleInputChange} name="titulo" value={newTicket.titulo} className="input-text" type="text" placeholder="Ej: ILS" />
-                  </div>
-                  <div className="m-2">
-                    <label htmlFor="departamento">Departement concerné</label>
-                    <select value={newTicket.departamento} onChange={handleInputChange} name="departamento" id="departamento" className="input-option">
-                      <option value="none" disabled selected>Departement concerné</option>
-                      <option value="IRE-IGC">IRE/IGC</option>
-                      <option value="SLI">SLI</option>
-                      <option value="ENA-MTEO">ENA-MTEO</option>
-                      <option value="CDT">CDT</option>
-                    </select>
-                  </div>
-                  <div className="m-2">
-                    <label htmlFor="prioridad">Criticité</label>
-                   <select value={newTicket.prioridad} onChange={handleInputChange} name="prioridad" id="prioridad" className="input-option">
-                      <option value="none" disabled selected>Criticité</option>
-                      <option value="HAUT">HAUT</option>
-                      <option value="MOYENE">MOYENE</option>
-                      <option value="BASS">BASS</option>
-                    </select>
-                  </div>
-                  <div className="m-2" >
-                    <label htmlFor="comentario" style={{ display: 'block' }}>Commentaire</label>
-                    <textarea required name="comentario" onChange={handleInputChange} value={newTicket.comentario} className="input-textArea">
-                    </textarea>
-                    {/* <Editor
-                      editorState={editorState}
-                      onEditorStateChange={setEditorState}
-                      placeholder="Anomalie constaté"
-                      toolbarClassName="toolbarClassName"
-                      wrapperClassName="wrapperClassName"
-                      editorClassName="editorClassName"
+           </div>
+           <div className="btn-tarea-container">
+             <button className="btn-tarea" data-bs-toggle="modal" data-bs-target="#modalTareaAdd"><span><BsFileEarmarkDiffFill /></span> Nouveau  ticket</button>
+           </div>
 
-                    /> */}
-                  </div>
-                  <div className="m-2">
-                    <input className="btn btn-primary col-12" type="submit" value="Registrer" />
-                  </div>
-                  {spin ?
-                    <div className="col-12 spin">
-                      <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                    </div>
+         </div>
+         <div className="form-buscar-container">
+           <form onSubmit={handleBuscar}>
+             <div className="input-container">
+               <input className="input-buscar" type="text" placeholder="Titre" />
+               <button className="boton-buscar"><BsSearch /></button>
+             </div>
+           </form>
 
-                    : ''}
-                </form>
+         </div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+       </div>
+
+       <div className=''>
+         <TablaTareas tipoTarea={header} getTicket={tickets} />
+       </div>
 
 
+       {/* modal para agregar una nueva tarea  */}
+       <div className="modal fade" id="modalTareaAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div className="modal-dialog ">
+           <div className="modal-content">
+             <div className="modal-header">
+               <h1 className="modal-title fs-5" id="exampleModalLabel">Nouveu ticket</h1>
+               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div className="modal-body">
+               <div className="body-container">
 
-    </div>
+                 <form onSubmit={handleNuevaTarea}>
+                   <div className="m-2">
+                     <label htmlFor="titulo">Titre</label>
+                     <input required onChange={handleInputChange} name="titulo" value={newTicket.titulo} className="input-text" type="text" placeholder="Ej: ILS" />
+                   </div>
+                   <div className="m-2">
+                     <label htmlFor="departamento">Departement concerné</label>
+                     <select value={newTicket.departamento} onChange={handleInputChange} name="departamento" id="departamento" className="input-option">
+                       <option value="none" disabled selected>Departement concerné</option>
+                       <option value="IRE-IGC">IRE-IGC</option>
+                       <option value="SLI">SLI</option>
+                       <option value="ENA-MTEO">ENA-MTEO</option>
+                       <option value="CDT">CDT</option>
+                     </select>
+                   </div>
+                   <div className="m-2">
+                     <label htmlFor="prioridad">Criticité</label>
+                    <select value={newTicket.prioridad} onChange={handleInputChange} name="prioridad" id="prioridad" className="input-option">
+                       <option value="none" disabled selected>Criticité</option>
+                       <option value="HAUT">HAUT</option>
+                       <option value="MOYENE">MOYENE</option>
+                       <option value="BASS">BASS</option>
+                     </select>
+                   </div>
+                   <div className="m-2" >
+                     <label htmlFor="comentario" style={{ display: 'block' }}>Commentaire</label>
+                     <textarea required name="comentario" onChange={handleInputChange} value={newTicket.comentario} className="input-textArea">
+                     </textarea>
+                     {/* <Editor
+                       editorState={editorState}
+                       onEditorStateChange={setEditorState}
+                       placeholder="Anomalie constaté"
+                       toolbarClassName="toolbarClassName"
+                       wrapperClassName="wrapperClassName"
+                       editorClassName="editorClassName"
+
+                     /> */}
+                   </div>
+                   <div className="m-2">
+                     <input className="btn btn-primary col-12" type="submit" value="Registrer" />
+                   </div>
+                   {spin ?
+                     <div className="col-12 spin">
+                       <div class="spinner-border" role="status">
+                         <span class="visually-hidden">Loading...</span>
+                       </div>
+                     </div>
+
+                     : ''}
+                 </form>
+
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+
+     </div>
+
   )
 }
 
 
 export default TicketSpace;
+
+

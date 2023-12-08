@@ -89,12 +89,22 @@ function TablaTareas({ tipoTarea, getTicket }) {
 
     }
 
+    const getRowStyle = (priority, estado) => {
+        if (priority === 'HAUT') {
+            return { backgroundColor: '#FFA0AF' };
+        } else if (priority === 'MOYENE') {
+            return { backgroundColor: '#FFFFAA' };
+        } else {
+            return { backgroundColor: 'white' };
+        }
+    };
+
 
 
 
     return (
-        <div className="tabla-tareas">
-            <table class="table" >
+        <div className="">
+            {/* <table class="table" >
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -135,7 +145,57 @@ function TablaTareas({ tipoTarea, getTicket }) {
                     })}
 
                 </tbody>
-            </table>
+            </table> */}
+
+
+            <div className="table-responsive">
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Priorité</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Dep.Origin</th>
+                            <th scope="col">Dep.Concerné</th>
+                            <th scope="col">Agent</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody style={{ fontSize: '12px' }}>
+                        {currentItems.map((item) => (
+                            <tr key={item._id} style={getRowStyle(item.prioridad, item.estado)} className="fila-tabla">
+                                <th scope="row">{moment(item.fecha_creacion).format('lll')}</th>
+                                <td title={item.titulo}>{item.titulo.substring(0, 7) + '...'}</td>
+                                <td>{item.prioridad}</td>
+                                <td style={item.estado ? { backgroundColor: '#FFABAF' } : { backgroundColor: '#adff2f' }}>
+                                    {item.estado ? 'Ouvert' : 'Ferme'}
+                                </td>
+                                <td>{item.departamento_origen}</td>
+                                <td>{item.departamento_objetivo}</td>
+                                <td>{item.autor.nombre.toUpperCase()}</td>
+                                <td>
+                                    <div className="accion-tabla-container">
+                                        <span title="Editer" id={item._id} className="editar">
+                                            <BiEdit />
+                                        </span>
+                                        <span
+                                            onClick={() => editeTicket(item._id)}
+                                            title="Commentaire"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalCommentTicket"
+                                            id={item._id}
+                                            className="comentar"
+                                        >
+                                            <BiSolidCommentEdit />
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
 
 
@@ -227,7 +287,7 @@ function TablaTareas({ tipoTarea, getTicket }) {
                                                         </div>
                                                         <div>
                                                             <button disabled={ticket.estado ? false : true} type="submit" className="boton-guardar-comentario">Garder</button>
-                                                            <button type="button" onClick={() => editeTicket(ticket._id)} className="boton-actualizar-ticker">Actualiser</button>
+                                                            <button type="button" onClick={() => editeTicket(ticket._id)} className="boton-actualizar-ticker">Mise à jour</button>
                                                         </div>
 
                                                     </form>
